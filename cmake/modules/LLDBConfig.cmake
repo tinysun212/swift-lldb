@@ -36,6 +36,9 @@ set(LLDB_RELOCATABLE_PYTHON 0 CACHE BOOL
 if (NOT CMAKE_SYSTEM_NAME MATCHES "Windows")
   set(LLDB_EXPORT_ALL_SYMBOLS 0 CACHE BOOL
     "Causes lldb to export all symbols when building liblldb.")
+  if (CMAKE_SYSTEM_NAME MATCHES "CYGWIN")
+    set(LLDB_EXPORT_ALL_SYMBOLS 1)
+  endif()
 else()
   # Windows doesn't support toggling this, so don't bother making it a
   # cache variable.

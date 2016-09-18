@@ -17,6 +17,13 @@ if (LLDB_DISABLE_LIBEDIT)
   add_definitions( -DLLDB_DISABLE_LIBEDIT )
 endif()
 
+if (CMAKE_SYSTEM_NAME MATCHES "CYGWIN")
+  add_definitions( -D__addr_t_defined )
+  set( CMAKE_CXX_FLAGS           "${CMAKE_CXX_FLAGS} -mcmodel=large" )
+  set( CMAKE_C_FLAGS             "${CMAKE_C_FLAGS} -mcmodel=large" )
+  set( CMAKE_EXE_LINKER_FLAGS    "${CMAKE_EXE_LINKER_FLAGS} -Wl,--allow-multiple-definition" )
+endif()
+
 # add_subdirectory(include)
 add_subdirectory(docs)
 if (NOT LLDB_DISABLE_PYTHON)
