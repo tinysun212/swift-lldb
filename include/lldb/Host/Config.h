@@ -31,6 +31,10 @@
 
 #include "lldb/Host/netbsd/Config.h"
 
+#elif defined(__CYGWIN__)
+
+#include "lldb/Host/cygwin/Config.h"
+
 #elif defined(__MINGW__) || defined(__MINGW32__)
 
 #include "lldb/Host/mingw/Config.h"

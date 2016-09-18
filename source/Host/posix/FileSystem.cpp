@@ -20,6 +20,9 @@
 #include <sys/mount.h>
 #include <sys/statfs.h>
 #endif
+#if defined(__CYGWIN__)
+#include <sys/statfs.h>
+#endif
 #if defined(__NetBSD__)
 #include <sys/statvfs.h>
 #endif
@@ -229,6 +232,8 @@ static bool IsLocal(const struct statfs &info) {
   default:
     return true;
   }
+#elif defined(__CYGWIN__)
+  return true;
 #else
   return (info.f_flags & MNT_LOCAL) != 0;
 #endif

@@ -17,6 +17,9 @@ typedef HostThreadWindows HostNativeThread;
 #elif defined(__linux__)
 class HostThreadLinux;
 typedef HostThreadLinux HostNativeThread;
+#elif defined(__CYGWIN__)
+class HostThreadCygwin;
+typedef HostThreadCygwin HostNativeThread;
 #elif defined(__FreeBSD__) || defined(__FreeBSD_kernel__)
 class HostThreadFreeBSD;
 typedef HostThreadFreeBSD HostNativeThread;

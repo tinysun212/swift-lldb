@@ -134,6 +134,14 @@ if ( CMAKE_SYSTEM_NAME MATCHES "Darwin" )
     )
 endif()
 
+# Cygwin-only libraries
+if ( CMAKE_SYSTEM_NAME MATCHES "CYGWIN" )
+  list(APPEND LLDB_USED_LIBS
+    lldbPluginProcessCygwin
+    lldbPluginProcessPOSIX
+   )
+endif ()
+
 macro(add_libs_from_path build_dir lib_prefix lib_list)
   file(TO_CMAKE_PATH ${build_dir} build_dir_cmake)
   

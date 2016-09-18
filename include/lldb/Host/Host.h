@@ -210,7 +210,7 @@ public:
   static bool GetProcessInfo(lldb::pid_t pid, ProcessInstanceInfo &proc_info);
 
 #if defined(__APPLE__) || defined(__linux__) || defined(__FreeBSD__) ||        \
-    defined(__GLIBC__) || defined(__NetBSD__)
+    defined(__GLIBC__) || defined(__NetBSD__) || defined(__CYGWIN__)
 #if !defined(__ANDROID__) && !defined(__ANDROID_NDK__)
 
   static short GetPosixspawnFlags(const ProcessLaunchInfo &launch_info);
@@ -225,7 +225,7 @@ public:
 
 #endif // !defined(__ANDROID__) && !defined(__ANDROID_NDK__)
 #endif // defined (__APPLE__) || defined (__linux__) || defined (__FreeBSD__) ||
-       // defined (__GLIBC__) || defined(__NetBSD__)
+       // defined (__GLIBC__) || defined(__NetBSD__) || defined (__CYGWIN__)
 
   static const lldb::UnixSignalsSP &GetUnixSignals();
 

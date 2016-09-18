@@ -28,11 +28,14 @@
 #endif
 
 #if defined(__linux__) || defined(__FreeBSD__) ||                              \
-    defined(__FreeBSD_kernel__) || defined(__APPLE__) || defined(__NetBSD__)
+    defined(__FreeBSD_kernel__) || defined(__APPLE__) || defined(__NetBSD__) ||\
+    defined(__CYGWIN__)
 #if !defined(__ANDROID__) && !defined(__ANDROID_NDK__)
 #include <spawn.h>
 #endif
+#if !defined(__CYGWIN__)
 #include <sys/syscall.h>
+#endif
 #include <sys/wait.h>
 #endif
 
@@ -180,7 +183,7 @@ static thread_result_t MonitorChildProcessThreadFunction(void *arg) {
   delete info;
 
   int status = -1;
-#if defined(__FreeBSD__) || defined(__FreeBSD_kernel__)
+#if defined(__FreeBSD__) || defined(__FreeBSD_kernel__) || defined(__CYGWIN__)
 #define __WALL 0
 #endif
   const int options = __WALL;
@@ -454,7 +457,7 @@ bool Host::ResolveExecutableInBundle(FileSpec &file) { return false; }
 
 FileSpec Host::GetModuleFileSpecForHostAddress(const void *host_addr) {
   FileSpec module_filespec;
-#if !defined(__ANDROID__) && !defined(__ANDROID_NDK__)
+#if !defined(__ANDROID__) && !defined(__ANDROID_NDK__) && !defined(__CYGWIN__)
   Dl_info info;
   if (::dladdr(host_addr, &info)) {
     if (info.dli_fname)
@@ -621,7 +624,7 @@ Error Host::RunShellCommand(const Args &args, const FileSpec &working_dir,
 // systems
 
 #if defined(__APPLE__) || defined(__linux__) || defined(__FreeBSD__) ||        \
-    defined(__GLIBC__) || defined(__NetBSD__)
+    defined(__GLIBC__) || defined(__NetBSD__) || defined(__CYGWIN__)
 #if !defined(__ANDROID__) && !defined(__ANDROID_NDK__)
 // this method needs to be visible to macosx/Host.cpp and
 // common/Host.cpp.
@@ -694,7 +697,7 @@ Error Host::LaunchProcessPosixSpawn(const char *exe_path,
   sigemptyset(&no_signals);
   sigfillset(&all_signals);
   ::posix_spawnattr_setsigmask(&attr, &no_signals);
-#if defined(__linux__) || defined(__FreeBSD__)
+#if defined(__linux__) || defined(__FreeBSD__) || defined(__CYGWIN__)
   ::posix_spawnattr_setsigdefault(&attr, &no_signals);
 #else
   ::posix_spawnattr_setsigdefault(&attr, &all_signals);
@@ -961,7 +964,7 @@ bool Host::AddPosixSpawnFileAction(void *_file_actions, const FileAction *info,
        // defined (__GLIBC__) || defined(__NetBSD__)
 
 #if defined(__linux__) || defined(__FreeBSD__) || defined(__GLIBC__) ||        \
-    defined(__NetBSD__) || defined(_WIN32)
+    defined(__NetBSD__) || defined(_WIN32) || defined(__CYGWIN__)
 // The functions below implement process launching via posix_spawn() for Linux,
 // FreeBSD and NetBSD.
 

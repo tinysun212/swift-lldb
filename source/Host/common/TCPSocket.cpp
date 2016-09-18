@@ -202,7 +202,7 @@ Error TCPSocket::Accept(llvm::StringRef name, bool child_processes_inherit,
   while (!accept_connection) {
     struct sockaddr_in accept_addr;
     ::memset(&accept_addr, 0, sizeof accept_addr);
-#if !(defined(__linux__) || defined(_WIN32))
+#if !(defined(__linux__) || defined(_WIN32) || defined(__CYGWIN__))
     accept_addr.sin_len = sizeof accept_addr;
 #endif
     socklen_t accept_addr_len = sizeof accept_addr;
@@ -214,7 +214,7 @@ Error TCPSocket::Accept(llvm::StringRef name, bool child_processes_inherit,
       break;
 
     bool is_same_addr = true;
-#if !(defined(__linux__) || (defined(_WIN32)))
+#if !(defined(__linux__) || defined(_WIN32) || defined(__CYGWIN__))
     is_same_addr = (accept_addr_len == listen_addr.sockaddr_in().sin_len);
 #endif
     if (is_same_addr)

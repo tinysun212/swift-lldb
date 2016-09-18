@@ -20,6 +20,13 @@ include_directories(
   )
 endif ()
 
+if ( CMAKE_SYSTEM_NAME MATCHES "CYGWIN" )
+include_directories(
+  Plugins/Process/Cygwin
+  Plugins/Process/POSIX
+  )
+endif ()
+
 # Keep track of whether this is a buildbot build.
 set(LLDB_IS_BUILDBOT_BUILD FALSE CACHE BOOL
   "Indicate whether this is a buildbot build")

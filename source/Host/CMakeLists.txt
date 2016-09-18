@@ -143,6 +143,13 @@ else()
       netbsd/HostThreadNetBSD.cpp
       netbsd/ThisThread.cpp
       )
+  elseif (CMAKE_SYSTEM_NAME MATCHES "CYGWIN")
+    add_host_subdirectory(cygwin
+      cygwin/Host.cpp
+      cygwin/HostInfoCygwin.cpp
+      cygwin/HostThreadCygwin.cpp
+      cygwin/ThisThread.cpp
+      )
   endif()
 endif()
 

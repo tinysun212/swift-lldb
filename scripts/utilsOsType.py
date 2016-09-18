@@ -36,6 +36,7 @@ if sys.version_info.major >= 3:
         Linux = 3
         NetBSD = 4
         Windows = 5
+        Cygwin = 6
 else:
     class EnumOsType(object):
         values = ["Unknown",
@@ -43,7 +44,8 @@ else:
                   "FreeBSD",
                   "Linux",
                   "NetBSD",
-                  "Windows"]
+                  "Windows",
+                  "Cygwin"]
 
         class __metaclass__(type):
             #++----------------------------------------------------------------
@@ -91,5 +93,7 @@ def determine_os_type():
         eOSType = EnumOsType.NetBSD
     elif strOS == "win32":
         eOSType = EnumOsType.Windows
+    elif strOS.startswith("cygwin"):
+        eOSType = EnumOsType.Cygwin
 
     return eOSType

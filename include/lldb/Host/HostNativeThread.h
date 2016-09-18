@@ -16,6 +16,8 @@
 #include "lldb/Host/windows/HostThreadWindows.h"
 #elif defined(__linux__)
 #include "lldb/Host/linux/HostThreadLinux.h"
+#elif defined(__CYGWIN__)
+#include "lldb/Host/cygwin/HostThreadCygwin.h"
 #elif defined(__FreeBSD__) || defined(__FreeBSD_kernel__)
 #include "lldb/Host/freebsd/HostThreadFreeBSD.h"
 #elif defined(__NetBSD__)
