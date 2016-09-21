@@ -21,6 +21,13 @@ include_directories(
   )
 endif ()
 
+if ( CMAKE_SYSTEM_NAME MATCHES "CYGWIN" )
+include_directories(
+  ../../../../llvm/include
+  ../../source/Plugins/Process/POSIX
+  )
+endif ()
+
 include_directories(../../source)
 
 include(../../cmake/LLDBDependencies.cmake)

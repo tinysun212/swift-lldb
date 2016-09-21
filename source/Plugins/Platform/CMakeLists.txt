@@ -8,6 +8,8 @@
   add_subdirectory(MacOSX)
 #elseif (CMAKE_SYSTEM_NAME MATCHES "Windows")
   add_subdirectory(Windows)
+#elseif (CMAKE_SYSTEM_NAME MATCHES "CYGWIN")
+  add_subdirectory(Cygwin)
 #endif()
 
 add_subdirectory(POSIX)

@@ -71,3 +71,11 @@ FileSpec HostInfoCygwin::GetProgramFileSpec() {
 
   return g_program_filespec;
 }
+
+bool HostInfoCygwin::ComputeSupportExeDirectory(FileSpec &file_spec) {
+  if (HostInfoPosix::ComputeSupportExeDirectory(file_spec) &&
+      file_spec.IsAbsolute() && file_spec.Exists())
+    return true;
+  file_spec.GetDirectory() = GetProgramFileSpec().GetDirectory();
+  return !file_spec.GetDirectory().IsEmpty();
+}

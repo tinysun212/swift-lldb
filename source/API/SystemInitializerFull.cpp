@@ -69,6 +69,7 @@
 #include "Plugins/OperatingSystem/Go/OperatingSystemGo.h"
 #include "Plugins/OperatingSystem/Python/OperatingSystemPython.h"
 #include "Plugins/Platform/Android/PlatformAndroid.h"
+#include "Plugins/Platform/Cygwin/PlatformCygwin.h"
 #include "Plugins/Platform/FreeBSD/PlatformFreeBSD.h"
 #include "Plugins/Platform/Kalimba/PlatformKalimba.h"
 #include "Plugins/Platform/Linux/PlatformLinux.h"
@@ -283,6 +284,7 @@ void SystemInitializerFull::Initialize() {
   ScriptInterpreterPython::Initialize();
 #endif
 
+  platform_cygwin::PlatformCygwin::Initialize();
   platform_freebsd::PlatformFreeBSD::Initialize();
   platform_linux::PlatformLinux::Initialize();
   platform_netbsd::PlatformNetBSD::Initialize();

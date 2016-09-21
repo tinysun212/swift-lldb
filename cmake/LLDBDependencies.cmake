@@ -38,6 +38,7 @@ set( LLDB_USED_LIBS
   lldbPluginProcessGDBRemote
   lldbPluginProcessUtility
   lldbPluginPlatformAndroid
+  lldbPluginPlatformCygwin
   lldbPluginPlatformGDB
   lldbPluginPlatformFreeBSD
   lldbPluginPlatformKalimba
